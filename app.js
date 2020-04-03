@@ -1,8 +1,10 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var fs = require('fs');
-var logger = require('morgan');
+var pino = require('express-pino-logger')();
 const webpush = require('web-push');
 
 var indexRouter = require('./routes/index');
@@ -20,7 +22,7 @@ webpush.setVapidDetails(
 var app = express();
 
 app.set('view engine', 'ejs');
-app.use(logger('dev'));
+app.use(pino);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
