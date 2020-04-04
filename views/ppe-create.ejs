@@ -1,165 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('partials/head') %>
-    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
-  </head>
+    <head>
+        <%- include('partials/head') %>
+        <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+    </head>
 
-  <body class=" bg-gradient">
-    <%- include('partials/navbar') %>
-    <!-- <div class="fab-container">
-        <a type="button" class="btn btn-fab btn-primary" href="/ppe/map" style>
-            <span class="fa fa-map-marker"></span>
-        </a>
-    </div> -->
+    <body class=" bg-gradient">
+        <%- include('partials/navbar') %>
 
-    <div class="container">
-      <div class="row justify-content-md-center mt-5">
-        <div class="col-md-6 card pt-2 pb-2 ml-3 mr-3 mb-3 shadow rounded">
-          <h2 class="text-center">Submit request</h2>
-	  
-	  <div class="btn-group btn-group-toggle" data-toggle="buttons">
-	    <label class="btn btn-outline-success active">
-	      <input type="radio" name="options" id="availability" checked> Availability
-	    </label>
-	    <label class="btn btn-outline-danger">
-	      <input type="radio" name="options" id="requirement"> Requirement
-	    </label>
-	    <label class="btn btn-outline-primary">
-	      <input type="radio" name="options" id="manufacturing"> Manufacturing
-	    </label>
-	  </div>
-          <div class="mt-5">
-            <form method="POST" action="/ppe">
-              <input id="request-mode" type="hidden" name="mode" value="availability">
+        <div class="fab-container">
+            <a type="button" class="btn btn-primary btn-fab" href="/ppe/map">
+                <span class="material-icons">
+                    location_on
+                </span>
+            </a>
+        </div>
 
-	      <fieldset>
-		<legend>
-		  I have an excess of
-		  <small class="text-muted">which I'm willing to share
-		    <i class="em em-gift_heart" aria-role="presentation" aria-label="HEART"></i>
-		  </small>
-		</legend>
+        <div class="container">
+            <div class="row justify-content-md-center mt-5">
+                <div class="col-md-6 card pt-2 pb-2 ml-3 mr-3 mb-3 shadow rounded">
+                    <h2 class="text-center">Submit request</h2>
+                    
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-outline-success active">
+                            <input type="radio" name="options" id="availability" checked> Availability
+                        </label>
+                        <label class="btn btn-outline-danger">
+                            <input type="radio" name="options" id="requirement"> Requirement
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="radio" name="options" id="manufacturing"> Manufacturing
+                        </label>
+                    </div>
+                    <div class="mt-5">
+                        <form method="POST" action="/ppe">
+                            <input id="request_mode" type="hidden" name="mode" value="availability">
 
-		<div class="form-group">
-                  <select class="form-control" id="PPETypeId" name="PPETypeId">
-                    <% PPETypes.forEach(function(PPEType) { %>
+                            <fieldset id="ppe_info_set">
+                                <legend>
+                                    <span>We have an excess of</span>
+                                    <i class="em em-gift_heart" aria-role="presentation"></i>
+                                    <small class="text-muted">
+                                    </small>
+                                </legend>
 
-                    <option value="<%- PPEType.id%>"><%- PPEType.name%></option>
-                    <% }); %>
-                  </select>
-		</div>
-		<div class="form-group">
-                  <label for="quantity">Quantity</label>
-                  <input class="form-control" id="quantity" type="number" name="quantity" min="1" required>
-		</div>
-	      </fieldset>
-	      
-	      <hr>
-	      <fieldset>
-		<legend>
-		  At this location
-		  <small class="text-muted">choose by clicking on the map</small>
-		</legend>
-		<div id="mapid" class="choose-location"></div>
-	      </fieldset>
-	      <hr>
+                                <div class="form-group">
+                                    <select class="form-control" id="PPETypeId" name="PPETypeId">
+                                        <% PPETypes.forEach(function(PPEType) { %>
 
-	      <fieldset>
-		<legend>
-		  Reach me using
- 		  <i class="em em-mega" aria-role="presentation" aria-label="MEGAPHONE"></i>
-		</legend>
-		<div class="form-group">
-                  <label for="name">Name</label>
-		  
-		  <div class="input-group mb-3">
-		    <div class="input-group-prepend">
-		      <span class="input-group-text">
-			<i class="em em-angel" aria-role="presentation" aria-label="ANGEL"></i>
-		      </span>
-		    </div>
-                    <input class="form-control" id="name" type="text" name="name" required>
-		  </div>
-		</div>
-		<div class="form-group">
-                  <label for="email">Email</label>
-		  <div class="input-group mb-3">
-		    <div class="input-group-prepend">
-		      <span class="input-group-text">
-			<i class="em em-e-mail" aria-role="presentation" aria-label="EMAIL"></i>
-		      </span>
-		    </div>		    
-                    <input class="form-control" id="email" type="text" name="email" required>
-		  </div>
-		</div>
-		<div class="form-group">
-                  <label for="contact">Contact</label>
-		  <div class="input-group mb-3">
-		    <div class="input-group-prepend">
-		      <span class="input-group-text">
-			<i class="em em-calling" aria-role="presentation" aria-label="PHONE"></i>
-		      </span>
-		    </div>		    
-                    <input class="form-control" id="contact" type="text" name="contact" required>
-		  </div>
-		</div>
-	      </fieldset>
-              <input class="form-control" id="latitude" type="hidden" name="latitude" required>
-              <input class="form-control" id="longitude" type="hidden" name="longitude" required>
+                                        <option value="<%- PPEType.id%>"><%- PPEType.name%></option>
+                                        <% }); %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantity">Quantity</label>
+                                    <input class="form-control" id="quantity" type="number" name="quantity" min="1" required>
+                                </div>
+                            </fieldset>
+                            
+                            <hr>
+                            <fieldset>
+                                <legend>
+                                    At this location
+                                    <small class="text-muted">choose by clicking on the map</small>
+                                </legend>
+                                <div id="mapid" class="choose-location"></div>
+                            </fieldset>
+                            <hr>
 
-              <button type="submit" class="btn btn-primary btn-block">Submit</button>
-            </form>
-	  </div>
-	</div>
-      </div>
-    </div>
-    <script>
-      let myMap;
-      let marker;
+                            <fieldset>
+                                <legend>
+                                    Reach me using
+                                    <i class="em em-mega" aria-role="presentation"></i>
+                                </legend>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i id="name_emoji" class="em em-angel" aria-role="presentation"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control" id="name" type="text" name="name" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="em em-e-mail" aria-role="presentation"></i>
+                                            </span>
+                                        </div>    
+                                        <input class="form-control" id="email" type="text" name="email" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact">Contact</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="em em-calling" aria-role="presentation"></i>
+                                            </span>
+                                        </div>    
+                                        <input class="form-control" id="contact" type="text" name="contact" required>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <input class="form-control" id="latitude" type="hidden" name="latitude" required>
+                            <input class="form-control" id="longitude" type="hidden" name="longitude" required>
 
-      function getLocation(callback) {
-          if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(callback);
-          } else {
-              x.innerHTML = "Geolocation is not supported by this browser.";
-          }
-      }
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            let myMap;
+            let marker;
 
-      function onMapClick(e) {
-          console.log(e)
-          var position = e.latlng;
-          marker.setLatLng(new L.LatLng(position.lat, position.lng));
-          mymap.panTo(new L.LatLng(position.lat, position.lng))
-          updateFormLocation(position.lat, position.lng)
-      };
+            function getLocation(callback) {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(callback);
+                } else {
+                    x.innerHTML = "Geolocation is not supported by this browser.";
+                }
+            }
 
-      function updateFormLocation(lat, lng) {
-          $('input[name=latitude]').val(lat)
-          $('input[name=longitude]').val(lng)
-      }
-      function displayMap(position) {
-          mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 15);
-          L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2hpbmphbiIsImEiOiJjazhiMHM2bzQwN2oyM2tvM3d3cm81dmxsIn0.cVV5b0Ey8lIQ2DcsJ5ZDmA', {
-              maxZoom: 18,
-              attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-                  '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                  'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-              id: 'mapbox/streets-v11',
-              tileSize: 512,
-              zoomOffset: -1
-          }).addTo(mymap);
-          marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
-          mymap.on('click', onMapClick);
-          updateFormLocation(position.coords.latitude, position.coords.longitude)
-      }
+            function onMapClick(e) {
+                console.log(e)
+                var position = e.latlng;
+                marker.setLatLng(new L.LatLng(position.lat, position.lng));
+                mymap.panTo(new L.LatLng(position.lat, position.lng))
+                updateFormLocation(position.lat, position.lng)
+            };
+
+            function updateFormLocation(lat, lng) {
+                $('input[name=latitude]').val(lat)
+                $('input[name=longitude]').val(lng)
+            }
+            function displayMap(position) {
+                mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 15);
+                L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2hpbmphbiIsImEiOiJjazhiMHM2bzQwN2oyM2tvM3d3cm81dmxsIn0.cVV5b0Ey8lIQ2DcsJ5ZDmA', {
+                    maxZoom: 18,
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    id: 'mapbox/streets-v11',
+                    tileSize: 512,
+                    zoomOffset: -1
+                }).addTo(mymap);
+                marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
+                mymap.on('click', onMapClick);
+                updateFormLocation(position.coords.latitude, position.coords.longitude)
+            }
 
 
-      $(function () {
-          getLocation(displayMap)
-      });
+            $(function () {
+                getLocation(displayMap)
+            });
+            </script>
 
-      </script>
-  </body>
-
+        <script src="/js/ppe-create.js" async></script>
+    </body>
 </html>
