@@ -1,13 +1,13 @@
 'use strict';
 
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var fs = require('fs');
-var pino = require('express-pino-logger')();
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const fs = require('fs');
+const pino = require('express-pino-logger')();
 const webpush = require('web-push');
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 
 const vapidKeys = {
     publicKey: fs.readFileSync("./server.pub").toString(),
